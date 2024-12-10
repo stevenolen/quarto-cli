@@ -10,7 +10,7 @@ const fetch = wrapFetch();
 
 import { ensureProtocolAndTrailingSlash } from "../../../core/url.ts";
 import { ApiError } from "../../types.ts";
-import { Bundle, Content, Task, TaskStatus, User } from "./types.ts";
+import {Bundle, Content, ServerSettings, Task, TaskStatus, User} from "./types.ts";
 
 export class RSConnectClient {
   public constructor(
@@ -18,6 +18,10 @@ export class RSConnectClient {
     private readonly key_?: string,
   ) {
     this.server_ = ensureProtocolAndTrailingSlash(this.server_);
+  }
+
+  public getServerSettings(): Promise<ServerSettings> {
+    return this.get<ServerSettings>("__api__/server_settings");
   }
 
   public getUser(): Promise<User> {

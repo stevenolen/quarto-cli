@@ -137,20 +137,14 @@ async function authorizeToken(
     // validate that its a connect server
     const client = new RSConnectClient(server);
     try {
-      await client.getUser();
+      await client.getServerSettings();
     } catch (err) {
-      // connect server will give 401 for unauthorized, break out
-      // of the loop in that case
-      if (isUnauthorized(err)) {
-        break;
-      } else {
-        info(
-          colors.red(
-            "   Unable to connect to server (is this a valid Posit Connect Server?)",
-          ),
-        );
-        server = undefined;
-      }
+      info(
+        colors.red(
+          "   Unable to connect to server (is this a valid Posit Connect Server?)",
+        ),
+      );
+      server = undefined;
     }
   }
 

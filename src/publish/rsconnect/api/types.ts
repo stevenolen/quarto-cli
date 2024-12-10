@@ -42,3 +42,10 @@ export type TaskStatus = {
   code: number;
   error: string;
 };
+
+export type ServerSettings = {
+  hostname: string;
+  version: string;
+  build: string;
+  about: string;
+}
